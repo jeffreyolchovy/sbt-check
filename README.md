@@ -9,7 +9,7 @@ For more information, see _[Would scalac/sbt benefit from something like Rust 1.
 Add the following to your `project/plugins.sbt` file:
 
 ```
-resolvers += Resolver.bintrayRepo("jeffreyolchovy", "sbt-plugins")
+resolvers += Resolver.bintrayIvyRepo("jeffreyolchovy", "sbt-plugins")
 
 addSbtPlugin("com.github.jeffreyolchovy" % "sbt-check" % "0.1.0")
 ```
