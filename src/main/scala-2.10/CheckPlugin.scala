@@ -5,31 +5,14 @@ import sbt.CommandStrings.ExportStream
 import sbt.Compiler.InputsWithPrevious
 import sbt.compiler.MixedAnalyzingCompiler
 import sbt.inc.Analysis
-import sbt.plugins.JvmPlugin
 
-object CheckKeys {
-  val check = taskKey[Analysis]("Compile up to, and including, the typer phase")
-}
-
-object CheckPlugin extends AutoPlugin {
-
-  override def requires = JvmPlugin
-
-  override def trigger = allRequirements
-
-  object autoImport {
-    val CheckKeys = sbtcheck.CheckKeys
-    val check = CheckKeys.check
-  }
+object CheckPlugin extends AbstractCheckPlugin {
 
   import autoImport._
 
-  override def projectSettings = inTask(check)(scopedSettings) ++ Seq(
-    check := (compile in check).value,
-    scalacOptions in check += "-Ystop-after:typer"
-  )
+  type Result = Analysis
 
-  lazy val scopedSettings = Seq(
+  def scopedSettings = Seq(
     compile := compileTask.value,
     manipulateBytecode := compileIncremental.value,
     compileIncremental := (compileIncrementalTask tag (Tags.Compile, Tags.CPU)).value,
@@ -79,9 +62,5 @@ object CheckPlugin extends AutoPlugin {
     try {
       Compiler.compile(i, s.log)
     } finally x.close() // workaround for #937
-  }
-
-  def exported(w: java.io.PrintWriter, command: String): Seq[String] => Unit = {
-    args => w.println((command +: args).mkString(" "))
   }
 }
