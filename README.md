@@ -3,7 +3,7 @@ An sbt plugin that provides the `check` task.
 
 `check` compiles Scala sources with the `scalac` option `-Ystop-after:typer`.
 
-For more information, see _[Would scalac/sbt benefit from something like Rust 1.16's "cargo check" subcommand?](https://www.reddit.com/r/scala/comments/5ztjrl/would_scalacsbt_benefit_from_something_like_rust/)_.
+For more information, see <em>[Would scalac/sbt benefit from something like Rust 1.16's "cargo check" subcommand?](https://www.reddit.com/r/scala/comments/5ztjrl/would_scalacsbt_benefit_from_something_like_rust/)</em>.
 
 Compatible with sbt 0.13.x and 1.0.x.
 
@@ -11,8 +11,6 @@ Compatible with sbt 0.13.x and 1.0.x.
 Add the following to your `project/plugins.sbt` file:
 
 ```
-resolvers += Resolver.bintrayIvyRepo("jeffreyolchovy", "sbt-plugins")
-
 addSbtPlugin("com.github.jeffreyolchovy" % "sbt-check" % "0.1.1")
 ```
 
